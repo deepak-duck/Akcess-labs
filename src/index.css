@@ -164,7 +164,7 @@
 
 .skiptomain{
   position: absolute;
-  left: -999;
+  left: -999px;
   top: 3rem;
   opacity: 0;
   height: fit-content;
