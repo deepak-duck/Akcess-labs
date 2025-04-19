@@ -130,3 +130,47 @@
 .hover-scale:hover {
   transform: scale(1.03);
 }
+.skip-to-content{
+  /* display: ; */
+  position: absolute;
+  left: 5px;
+  top: 15px;
+  z-index: 100000;
+  /* background-color: antiquewhite; */
+  height: 3rem;
+  width: 5rem;
+  color: white;
+}
+.skip-to-content:focus{
+  display: block;
+  position: absolute;
+  left: 5px;
+  top: 15px;
+  z-index: 100000;
+  /* background-color: antiquewhite; */
+  height: 3rem;
+  width: 5rem;
+  color: white;
+}
+
+/* .hehe:focus{
+  border: 1px solid white;
+} */
+/* *:focus {
+  border: 1px solid white;
+} */
+
+/* h-12 w-20 absolute left-0 top-0 -translate-y-full opacity-0 focus:translate-y-0 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-blue-500 focus:text-white px-4 py-2 transition-all duration-200 */
+
+.skiptomain{
+  position: absolute;
+  left: .25rem;
+  top: 3rem;
+  opacity: 0;
+  height: fit-content;
+  width: fit-content;
+}
+
+.skiptomain:focus{
+  opacity: 100;
+}

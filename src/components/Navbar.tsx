@@ -4,11 +4,14 @@ import { Link, useLocation } from "react-router-dom";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-
+  const [activeHash, setActiveHash] = useState("");
   // Close mobile menu when route changes
   useEffect(() => {
     setIsMenuOpen(false);
-  }, [location.pathname]);
+    const hash = location.hash.replace("#", "");
+    setActiveHash(hash || (location.pathname === "/" ? "home" : ""));
+  }, [location]);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -88,21 +91,50 @@ const Navbar = () => {
       // Update URL without page reload
       window.history.pushState(null, "", `/#${hash}`);
 
+      setActiveHash(hash);
+
       // Close mobile menu
       setIsMenuOpen(false);
     }
   };
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (location.pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setActiveHash("home");
+    }
+  };
+
+  const isActive = (hash: string | null, path: string) => {
+    if (!hash && path === "/contact-us") {
+      return location.pathname === "/contact-us";
+    }
+    return hash === activeHash;
+  };
+
   return (
     <nav
-      className="bg-akcess-black py-4 px-6 md:px-12 lg:px-24 sticky top-0 z-50"
+      className="bg-black py-4 px-6 md:px-12 lg:px-28 sticky top-0 z-50"
       aria-label="Main navigation"
     >
+      {/* <a href="#contact" className="skip-to-content">
+        Skip to main
+      </a> */}
+
+      <a href="#contact" className="skiptomain">
+        Skip to main
+      </a>
       <div className="flex justify-between items-center">
         <div className="flex items-center">
-          <Link to="/" className="flex items-center space-x-2">
+          <Link
+            to="/"
+            onClick={handleLogoClick}
+            className="flex items-center space-x-2"
+          >
             <img src="logo.svg" alt="" />
             <span className="text-white font-bold text-xl">
-              AKCESS <br /> LABS
+              AKSCESS <br /> LABS
             </span>
           </Link>
         </div>
@@ -136,10 +168,16 @@ const Navbar = () => {
             <a
               key={index}
               href={item.path}
-              className="text-white hover:text-akcess-lime transition-colors"
+              // className="text-white hover:text-akcess-lime transition-colors"
+              className={`text-white hover:text-akcess-lime transition-colors relative ${
+                isActive(item.hash, item.path) ? "font-medium" : ""
+              }`}
               onClick={(e) => handleNavClick(e, item.hash || null)}
             >
               {item.label}
+              {isActive(item.hash, item.path) && (
+                <span className="absolute -bottom-1.5 left-0 w-full h-0.5 bg-akcess-lime rounded-full transition-all duration-300"></span>
+              )}
             </a>
           ))}
         </div>

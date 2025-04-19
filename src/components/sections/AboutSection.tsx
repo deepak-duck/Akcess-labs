@@ -1,99 +1,141 @@
+import React from "react";
+import { Card, CardContent } from "../../components/ui/card";
 
-import React from 'react';
-import StatCard from '@/components/StatCard';
+const About = (): JSX.Element => {
+  // Data for feature cards (no StatCard, adapted from second template)
+  const featureCards = [
+    {
+      icon: "/frame.svg", // Replace with actual icon path
+      title: "15+ Years Experience",
+      description:
+        "Over a decade and a half of delivering exceptional accessibility solutions for businesses of all sizes.",
+    },
+    {
+      icon: "/frame-2.svg", // Replace with actual icon path
+      title: "50M+ Monthly Engagements",
+      description:
+        "Our solutions help millions of users access digital content every month, creating more inclusive experiences.",
+    },
+    {
+      icon: "/frame-1.svg", // Replace with actual icon path
+      title: "400k+ User Accessibility",
+      description:
+        "Hundreds of thousands of users with disabilities can now access digital content thanks to our solutions.",
+    },
+  ];
 
-const AboutSection = () => {
+  // Data for info cards (adapted from second template)
+  const infoCards = [
+    {
+      icon: "/frame-4.svg", // Replace with actual icon path
+      title: "Expert Team",
+      description:
+        "Our team consists of certified accessibility experts with years of experience in creating inclusive digital experiences.",
+    },
+    {
+      icon: "/frame-3.svg", // Replace with actual icon path
+      title: "Advisory Board",
+      description:
+        "Our advisory board includes individuals with disabilities who provide valuable insights into accessibility needs.",
+    },
+    {
+      icon: "/frame-5.svg", // Replace with actual icon path
+      title: "Industry Recognition",
+      description:
+        "We're recognized leaders in the accessibility field, regularly featured in industry publications and conferences.",
+    },
+  ];
+
   return (
-    <section id="about" className="py-24 md:py-32 bg-akcess-black">
+    <section id="about" className="py-24 md:py-32 bg-black">
       <div className="container mx-auto px-6">
+        {/* Hero Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="max-w-2xl">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-akcess-lime">About Us</h2>
-            <h3 className="text-2xl md:text-3xl font-bold mb-8">
-              We are here to make great design accessible and delightful for everyone
+            <h2 className="text-4xl font-['Plus_Jakarta_Sans',Helvetica] font-extrabold text-akcess-lime mb-6">
+              About Us
+            </h2>
+            <h3 className="text-[32px] font-['Plus_Jakarta_Sans',Helvetica] font-bold text-white mb-8 leading-10">
+              AKSCESS LABS is Here to make the world more accessible!
             </h3>
-            <p className="mb-6 text-gray-300 text-lg leading-relaxed">
-              At Akcess Labs, we believe that accessibility isn't just a checkbox—it's a fundamental aspect of 
-              creating technology that truly serves everyone. Our team of experts specializes in making digital 
-              experiences accessible to all users, regardless of their abilities or disabilities.
-            </p>
-            <p className="text-gray-300 text-lg leading-relaxed">
-              We combine technical expertise with a deep understanding of accessibility standards to help 
-              businesses create inclusive digital experiences. Our approach not only ensures compliance 
-              with legal requirements but also improves the overall user experience for everyone.
+            <p className="text-gray-300 text-lg font-['Plus_Jakarta_Sans',Helvetica] leading-relaxed">
+              At Akscess Labs, we believe that accessibility isn't just an
+              option—it's a necessity! Our mission is to bridge the digital gap
+              by providing top-tier accessibility testing and compliance
+              solutions to ensure inclusivity for all.
             </p>
           </div>
           <div className="relative">
             <div className="absolute inset-0 bg-akcess-lime rounded-lg opacity-20 transform rotate-3"></div>
-            <img 
-              src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" 
-              alt="Team working on accessibility solutions" 
-              className="rounded-lg w-full h-auto object-cover shadow-2xl relative z-10"
+            <img
+              className="w-full h-auto object-cover rounded-lg shadow-2xl relative z-10"
+              alt="Team working on accessibility solutions"
+              src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
             />
           </div>
         </div>
 
+        {/* Features Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-24">
-          <StatCard 
-            number="15+"
-            title="Years Experience"
-            description="Over a decade and a half of delivering exceptional accessibility solutions for businesses of all sizes."
-          />
-          <StatCard 
-            number="50M+"
-            title="Monthly Engagements"
-            description="Our solutions help millions of users access digital content every month, creating more inclusive experiences."
-          />
-          <StatCard 
-            number="400k+"
-            title="User Accessibility"
-            description="Hundreds of thousands of users with disabilities can now access digital content thanks to our solutions."
-          />
+          {featureCards.map((card, index) => (
+            <div key={index} className="flex flex-col items-start gap-6">
+              <div className="w-12 h-12 bg-akcess-lime rounded-full flex items-center justify-center">
+                <img
+                  className="w-6 h-6"
+                  alt={`${card.title} icon`}
+                  src={card.icon}
+                />
+              </div>
+              <h3 className="text-2xl font-['Plus_Jakarta_Sans',Helvetica] font-semibold text-white">
+                {card.title}
+              </h3>
+              <p className="text-gray-300 font-['Plus_Jakarta_Sans',Helvetica] text-base leading-relaxed">
+                {card.description}
+              </p>
+            </div>
+          ))}
         </div>
 
+        {/* Mission and Info Section */}
         <div className="mt-24">
-          <h3 className="text-2xl font-bold mb-8 text-center">Our Mission</h3>
-          <p className="text-gray-300 mb-16 text-lg max-w-4xl mx-auto leading-relaxed">
-            Our mission is to create a more inclusive digital world where technology works for everyone, 
-            regardless of ability or disability. We believe that accessibility is not just about 
-            compliance—it's about creating better experiences for all users. By combining technical expertise 
-            with a deep understanding of accessibility needs, we help businesses build digital products 
-            that everyone can use and enjoy.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="flex items-start gap-5">
-              <div className="bg-akcess-lime rounded-full flex items-center justify-center w-12 h-12 shrink-0 text-akcess-black font-bold text-xl">
-                1
-              </div>
-              <div>
-                <h4 className="font-bold mb-3 text-xl">Expert Team</h4>
-                <p className="text-gray-300 leading-relaxed">
-                  Our team consists of certified accessibility experts with years of experience in creating inclusive digital experiences.
-                </p>
-              </div>
+          <h2 className="text-4xl font-['Plus_Jakarta_Sans',Helvetica] font-bold text-white mb-8">
+            Our Mission
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <div className="max-w-2xl">
+              <p className="text-gray-300 font-['Plus_Jakarta_Sans',Helvetica] text-lg leading-relaxed">
+                Our mission is to create a more inclusive digital world where
+                technology works for everyone, regardless of ability or
+                disability. We believe that accessibility is not just about
+                compliance—it's about creating better experiences for all users.
+                By combining technical expertise with a deep understanding of
+                accessibility needs, we help businesses build digital products
+                that everyone can use and enjoy.
+              </p>
             </div>
-            <div className="flex items-start gap-5">
-              <div className="bg-akcess-lime rounded-full flex items-center justify-center w-12 h-12 shrink-0 text-akcess-black font-bold text-xl">
-                2
-              </div>
-              <div>
-                <h4 className="font-bold mb-3 text-xl">Advisory Board</h4>
-                <p className="text-gray-300 leading-relaxed">
-                  Our advisory board includes individuals with disabilities who provide valuable insights into accessibility needs.
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-5">
-              <div className="bg-akcess-lime rounded-full flex items-center justify-center w-12 h-12 shrink-0 text-akcess-black font-bold text-xl">
-                3
-              </div>
-              <div>
-                <h4 className="font-bold mb-3 text-xl">Industry Recognition</h4>
-                <p className="text-gray-300 leading-relaxed">
-                  We're recognized leaders in the accessibility field, regularly featured in industry publications and conferences.
-                </p>
-              </div>
+            <div className="flex flex-col gap-12">
+              {infoCards.map((card, index) => (
+                <Card
+                  key={index}
+                  className="w-full bg-black rounded-md border-0"
+                >
+                  <CardContent className="flex items-center gap-6 p-4">
+                    <img
+                      className="w-9 h-9"
+                      alt={`${card.title} icon`}
+                      src={card.icon}
+                    />
+                    <div className="flex flex-col gap-2">
+                      <h3 className="text-2xl font-['Plus_Jakarta_Sans',Helvetica] font-semibold text-white">
+                        {card.title}
+                      </h3>
+                      <p className="text-gray-300 font-['Plus_Jakarta_Sans',Helvetica] text-base leading-relaxed">
+                        {card.description}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </div>
@@ -102,4 +144,4 @@ const AboutSection = () => {
   );
 };
 
-export default AboutSection;
+export default About;
