@@ -164,7 +164,7 @@
 
 .skiptomain{
   position: absolute;
-  left: .25rem;
+  left: -999;
   top: 3rem;
   opacity: 0;
   height: fit-content;
@@ -172,5 +172,6 @@
 }
 
 .skiptomain:focus{
+  left: .25rem;
   opacity: 100;
 }
