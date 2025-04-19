@@ -12,38 +12,43 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="py-32 md:py-40 relative overflow-hidden"
-      style={{
-        background: "linear-gradient(135deg, #121212 0%, #242424 100%)",
-      }}
+      className="py-32 md:py-40 relative overflow-hidden bg-black"
     >
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
+      <div className=" px-6 relative z-10">
+        <div className="text-center">
+          {/* <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
             <span className="text-akcess-lime">Everyone</span> Should Be Able To{" "}
             <span className="text-akcess-lime">Enjoy</span>
             <br className="hidden md:block" />
             Your <span className="text-akcess-lime">Website</span>
+          </h1> */}
+          <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold mb-8">
+            <span className="text-akcess-lime">Everyone</span> Should Be Able To
+            <span className="text-akcess-lime"> Enjoy</span> <br /> Your
+            <span className="text-akcess-lime"> Website</span>, Regardless Of
+            Ability!
           </h1>
           {/* Everyone  should be able to enjoy  your website , regardless of ability!
 By streamlining accessibility, accessiBe's solutions empower businesses to take the inclusive approach to comply with the ADA & adhere to WCAG.
 Request a Demo
 Schedule a Consultation */}
-          <p className="text-xl text-gray-200 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-2xl mx-auto text-gray-200 mb-12 leading-relaxed">
             By Streamlining Accessibility, Our Solutions Empower Businesses to
-            Take The Inclusive Approach To Comply With The ADA & Adhere To WCAG!
+            Take The <br /> Inclusive Approach To Comply With The ADA & Adhere
+            To WCAG!
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
             <Button
-              className="lime-button text-lg py-6 px-8 rounded-md"
+              // className="lime-button text-lg py-6 px-8 rounded-md"
+              className="text-lg text-akcess-black hover:text-black hover:bg-akcess-lime py-6 px-8 rounded-md transition-all duration-300 bg-akcess-lime"
               onClick={handleContactUs}
             >
-              Become a Client
+              Request a Demo
             </Button>
             <Button
               // variant="outline"
               onClick={handleConsultation}
-              className="text-lg text-akcess-black hover:text-akcess-lime hover:bg-akcess-black py-6 px-8 rounded-md transition-all duration-300 bg-akcess-lime"
+              className="text-lg py-6 px-8 rounded-md border border-white bg-akcess-darkgray"
             >
               Schedule a Consultation
             </Button>
