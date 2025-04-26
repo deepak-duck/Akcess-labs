@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Twitter,
-  Facebook,
-  Instagram,
-  Linkedin,
-  Github,
-  Youtube,
-} from "lucide-react";
+import { Facebook, Instagram, Linkedin, Github, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -24,53 +17,76 @@ const Footer = () => {
             <p className="text-gray-400 mb-6">
               Making the web accessible for everyone, one website at a time.
             </p>
-            <div className="flex space-x-4">
-              <a
-                href="#"
-                className="text-gray-400 hover:text-akcess-lime transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter size={20} />
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-akcess-lime transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook size={20} />
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-akcess-lime transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram size={20} />
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-akcess-lime transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={20} />
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-akcess-lime transition-colors"
-                aria-label="GitHub"
-              >
-                <Github size={20} />
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-akcess-lime transition-colors"
-                aria-label="YouTube"
-              >
-                <Youtube size={20} />
-              </a>
-            </div>
+            <ul className="flex space-x-4">
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-akcess-lime transition-colors"
+                  aria-label="X"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    height="20"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M18.244 2.25h2.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231z" />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-akcess-lime transition-colors"
+                  aria-label="Facebook"
+                >
+                  <Facebook aria-hidden="true" size={20} />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-akcess-lime transition-colors"
+                  aria-label="Instagram"
+                >
+                  <Instagram aria-hidden="true" size={20} />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-akcess-lime transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin aria-hidden="true" size={20} />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-akcess-lime transition-colors"
+                  aria-label="GitHub"
+                >
+                  <Github aria-hidden="true" size={20} />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-akcess-lime transition-colors"
+                  aria-label="YouTube"
+                >
+                  <Youtube aria-hidden="true" size={20} />
+                </a>
+              </li>
+            </ul>
           </div>
           <div>
-            <h3 className="text-lg font-bold mb-6">Services</h3>
+            <h2 className="text-lg font-bold mb-6">Services</h2>
             <ul className="space-y-4">
               <li>
                 <a
@@ -115,7 +131,7 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-bold mb-6">Company</h3>
+            <h2 className="text-lg font-bold mb-6">Company</h2>
             <ul className="space-y-4">
               <li>
                 <a
@@ -160,7 +176,7 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-bold mb-6">Resources</h3>
+            <h2 className="text-lg font-bold mb-6">Resources</h2>
             <ul className="space-y-4">
               <li>
                 <a
@@ -210,32 +226,34 @@ const Footer = () => {
             <p className="text-gray-400 mb-4 md:mb-0">
               © {currentYear} Akscess Labs. All Rights Reserved.
             </p>
-            <div className="flex flex-wrap gap-6">
-              <a
-                href="#"
-                className="text-gray-400 hover:text-akcess-lime transition-colors"
-              >
-                Terms of Service
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-akcess-lime transition-colors"
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-akcess-lime transition-colors"
-              >
-                Cookie Policy
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-akcess-lime transition-colors"
-              >
-                Sitemap
-              </a>
-            </div>
+            <ul className="flex flex-wrap gap-6">
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-akcess-lime transition-colors"
+                >
+                  Terms of Service
+                </a>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-akcess-lime transition-colors"
+                >
+                  Privacy Policy
+                </a>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-akcess-lime transition-colors"
+                >
+                  Cookie Policy
+                </a>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-akcess-lime transition-colors"
+                >
+                  Sitemap
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

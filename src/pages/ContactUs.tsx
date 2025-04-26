@@ -10,6 +10,9 @@ const ContactUs = () => {
       <Navbar />
 
       {/* Contact Section */}
+      <h1 className="text-3xl md:text-4xl font-bold text-center">
+        Contact <span className="text-akcess-lime">Us</span>
+      </h1>
       <section className="py-16 px-4">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -39,7 +42,7 @@ const ContactUs = () => {
               <div className="space-y-8">
                 <div className="flex items-start space-x-4">
                   <div className="bg-akcess-lime rounded-full p-3 text-akcess-black">
-                    <MapPin size={24} />
+                    <MapPin aria-hidden="true" size={24} />
                   </div>
                   <div>
                     <h3 className="font-bold text-xl mb-2">Our Location</h3>
@@ -53,7 +56,7 @@ const ContactUs = () => {
                 </div>
                 <div className="flex items-start space-x-4">
                   <div className="bg-akcess-lime rounded-full p-3 text-akcess-black">
-                    <Phone size={24} />
+                    <Phone aria-hidden="true" size={24} />
                   </div>
                   <div>
                     <h3 className="font-bold text-xl mb-2">Phone</h3>
@@ -69,7 +72,7 @@ const ContactUs = () => {
                 </div>
                 <div className="flex items-start space-x-4">
                   <div className="bg-akcess-lime rounded-full p-3 text-akcess-black">
-                    <Mail size={24} />
+                    <Mail aria-hidden="true" size={24} />
                   </div>
                   <div>
                     <h3 className="font-bold text-xl mb-2">Email</h3>
@@ -86,7 +89,7 @@ const ContactUs = () => {
               </div>
               <div className="mt-12">
                 <h3 className="text-xl font-bold mb-4">Business Hours</h3>
-                <table className="w-full text-gray-300">
+                <table className="w-full text-gray-300" role="presentation">
                   <tbody>
                     <tr>
                       <td className="py-2">Monday - Friday:</td>
@@ -291,11 +294,13 @@ const ContactFormWithPhone = () => {
           aria-describedby={
             errors.name && touched.name ? "name-error" : undefined
           }
+          aria-required="true"
+          autoComplete="name"
           aria-invalid={!!errors.name && touched.name}
         />
         {errors.name && touched.name && (
           <p id="name-error" className="mt-1 text-sm text-red-500" role="alert">
-            {errors.name}
+            Error: {errors.name}
           </p>
         )}
       </div>

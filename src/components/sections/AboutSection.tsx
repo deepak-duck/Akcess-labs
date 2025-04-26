@@ -52,13 +52,13 @@ const About = (): JSX.Element => {
         {/* Hero Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="max-w-2xl">
-            <h2 className="text-4xl font-['Plus_Jakarta_Sans',Helvetica] font-extrabold text-akcess-lime mb-6">
+            <h2 className="text-4xl font-extrabold text-akcess-lime mb-6">
               About Us
             </h2>
-            <h3 className="text-[32px] font-['Plus_Jakarta_Sans',Helvetica] font-bold text-white mb-8 leading-10">
+            <h3 className="text-[32px] font-bold text-white mb-8 leading-10">
               AKSCESS LABS is Here to make the world more accessible!
             </h3>
-            <p className="text-gray-300 text-lg font-['Plus_Jakarta_Sans',Helvetica] leading-relaxed">
+            <p className="text-gray-300 text-lg leading-relaxed">
               At Akscess Labs, we believe that accessibility isn't just an
               option—it's a necessity! Our mission is to bridge the digital gap
               by providing top-tier accessibility testing and compliance
@@ -66,10 +66,14 @@ const About = (): JSX.Element => {
             </p>
           </div>
           <div className="relative">
-            <div className="absolute inset-0 bg-akcess-lime rounded-lg opacity-20 transform rotate-3"></div>
+            <div
+              className="absolute inset-0 bg-akcess-lime rounded-lg opacity-20 transform rotate-3"
+              aria-hidden="true"
+            ></div>
             <img
               className="w-full h-auto object-cover rounded-lg shadow-2xl relative z-10"
-              alt="Team working on accessibility solutions"
+              alt=""
+              aria-hidden="true"
               src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
             />
           </div>
@@ -82,14 +86,15 @@ const About = (): JSX.Element => {
               <div className="w-12 h-12 bg-akcess-lime rounded-full flex items-center justify-center">
                 <img
                   className="w-6 h-6"
-                  alt={`${card.title} icon`}
+                  alt=""
+                  aria-hidden="true"
                   src={card.icon}
                 />
               </div>
-              <h3 className="text-2xl font-['Plus_Jakarta_Sans',Helvetica] font-semibold text-white">
+              <h3 className="text-2xl font-semibold text-white">
                 {card.title}
               </h3>
-              <p className="text-gray-300 font-['Plus_Jakarta_Sans',Helvetica] text-base leading-relaxed">
+              <p className="text-gray-300 text-base leading-relaxed">
                 {card.description}
               </p>
             </div>
@@ -98,12 +103,10 @@ const About = (): JSX.Element => {
 
         {/* Mission and Info Section */}
         <div className="mt-24">
-          <h2 className="text-4xl font-['Plus_Jakarta_Sans',Helvetica] font-bold text-white mb-8">
-            Our Mission
-          </h2>
+          <h2 className="text-4xl font-bold text-white mb-8">Our Mission</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div className="max-w-2xl">
-              <p className="text-gray-300 font-['Plus_Jakarta_Sans',Helvetica] text-lg leading-relaxed">
+              <p className="text-gray-300 text-lg leading-relaxed">
                 Our mission is to create a more inclusive digital world where
                 technology works for everyone, regardless of ability or
                 disability. We believe that accessibility is not just about
@@ -122,14 +125,15 @@ const About = (): JSX.Element => {
                   <CardContent className="flex items-center gap-6 p-4">
                     <img
                       className="w-9 h-9"
-                      alt={`${card.title} icon`}
+                      alt=""
+                      aria-hidden="true"
                       src={card.icon}
                     />
                     <div className="flex flex-col gap-2">
-                      <h3 className="text-2xl font-['Plus_Jakarta_Sans',Helvetica] font-semibold text-white">
+                      <h3 className="text-2xl font-semibold text-white">
                         {card.title}
                       </h3>
-                      <p className="text-gray-300 font-['Plus_Jakarta_Sans',Helvetica] text-base leading-relaxed">
+                      <p className="text-gray-300 text-base leading-relaxed">
                         {card.description}
                       </p>
                     </div>

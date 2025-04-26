@@ -16,7 +16,7 @@ const FaqItem: React.FC<FaqItemProps> = ({
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div className="border-b border-gray-700">
+    <h3 className="border-b border-gray-700">
       <button
         className="w-full py-5 text-left flex justify-between items-center"
         onClick={() => setIsOpen(!isOpen)}
@@ -24,8 +24,12 @@ const FaqItem: React.FC<FaqItemProps> = ({
         aria-controls={`answer-${question.replace(/\s+/g, "-").toLowerCase()}`}
       >
         <span className="text-white font-bold text-xl">{question}</span>
-        <span className="hehe text-akcess-lime ml-4 ">
-          {isOpen ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
+        <span className="text-akcess-lime ml-4 ">
+          {isOpen ? (
+            <ChevronUp aria-hidden="true" size={24} />
+          ) : (
+            <ChevronDown aria-hidden="true" size={24} />
+          )}
         </span>
       </button>
       <AnimatePresence>
@@ -44,7 +48,7 @@ const FaqItem: React.FC<FaqItemProps> = ({
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </h3>
   );
 };
 
