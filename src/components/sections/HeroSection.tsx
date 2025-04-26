@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 const HeroSection = () => {
@@ -9,6 +9,23 @@ const HeroSection = () => {
   const handleConsultation = () => {
     window.open("/contact-us", "_blank");
   };
+
+  useEffect(() => {
+    const skipLink = document.querySelector(".skiptomain");
+    const demoButton = document.querySelector("#demobutton");
+
+    const handleSkip = (e) => {
+      e.preventDefault();
+      demoButton.focus();
+    };
+
+    skipLink.addEventListener("click", handleSkip);
+
+    return () => {
+      skipLink.removeEventListener("click", handleSkip);
+    };
+  }, []);
+
   return (
     <section
       id="home"
@@ -42,6 +59,7 @@ Schedule a Consultation */}
               // className="lime-button text-lg py-6 px-8 rounded-md"
               className="text-lg text-akcess-black hover:text-black hover:bg-akcess-lime py-6 px-8 rounded-md transition-all duration-300 bg-akcess-lime"
               onClick={handleContactUs}
+              id="demobutton"
             >
               Request a Demo
             </Button>
