@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import Navbar from "@/components/Navbar";
+import React, { useState, useRef } from "react";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
+import Navbar from "@/components/Navbar";
 
 const ContactUs = () => {
   return (
@@ -13,6 +13,10 @@ const ContactUs = () => {
       <h1 className="text-3xl md:text-4xl font-bold text-center">
         Contact <span className="text-akcess-lime">Us</span>
       </h1>
+      <p className="mt-4 text-center text-gray-100 max-w-2xl mx-auto">
+        Have questions about our accessibility services? Reach out to our team
+        for personalized assistance.
+      </p>
       <section className="py-16 px-4">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -114,34 +118,36 @@ const ContactUs = () => {
   );
 };
 
-// Extended contact form with phone field
 const ContactFormWithPhone = () => {
-  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     message: "",
   });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [touched, setTouched] = useState<Record<string, boolean>>({
+  const [touched, setTouched] = useState({
     name: false,
     email: false,
     phone: false,
     message: false,
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  // Refs for input fields and error announcement
+  const nameRef = useRef(null);
+  const emailRef = useRef(null);
+  const phoneRef = useRef(null);
+  const messageRef = useRef(null);
+  const errorMessageRef = useRef(null);
+
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
     });
 
-    // Clear error for the field if it exists
     if (errors[name]) {
       setErrors({
         ...errors,
@@ -150,8 +156,8 @@ const ContactFormWithPhone = () => {
     }
   };
 
-  const validateField = (name: string, value: string) => {
-    const newErrors: Record<string, string> = {};
+  const validateField = (name, value) => {
+    const newErrors = {};
 
     if (name === "name" && !value.trim()) {
       newErrors.name = "Name is required";
@@ -182,16 +188,13 @@ const ContactFormWithPhone = () => {
     return newErrors;
   };
 
-  const handleBlur = (
-    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleBlur = (e) => {
     const { name, value } = e.target;
     setTouched({
       ...touched,
       [name]: true,
     });
 
-    // Validate only the blurred field
     const fieldErrors = validateField(name, value);
     setErrors({
       ...errors,
@@ -200,7 +203,7 @@ const ContactFormWithPhone = () => {
   };
 
   const validateForm = () => {
-    const newErrors: Record<string, string> = {};
+    const newErrors = {};
 
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
@@ -227,14 +230,44 @@ const ContactFormWithPhone = () => {
     }
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return newErrors;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate all fields on submit
-    if (!validateForm()) {
+    // Validate all fields
+    const validationErrors = validateForm();
+    const hasErrors = Object.keys(validationErrors).length > 0;
+
+    if (hasErrors) {
+      // Update touched state for all fields with errors
+      const newTouched = { ...touched };
+      Object.keys(validationErrors).forEach((field) => {
+        newTouched[field] = true;
+      });
+      setTouched(newTouched);
+
+      // Focus on the first field with an error
+      const firstErrorField = Object.keys(validationErrors)[0];
+      if (firstErrorField === "name" && nameRef.current)
+        nameRef.current.focus();
+      else if (firstErrorField === "email" && emailRef.current)
+        emailRef.current.focus();
+      else if (firstErrorField === "phone" && phoneRef.current)
+        phoneRef.current.focus();
+      else if (firstErrorField === "message" && messageRef.current)
+        messageRef.current.focus();
+
+      // Announce errors to screen readers
+      if (errorMessageRef.current) {
+        errorMessageRef.current.textContent =
+          "There were errors in the form submission. Please correct them and try again.";
+        setTimeout(() => {
+          if (errorMessageRef.current) errorMessageRef.current.textContent = "";
+        }, 5000);
+      }
+
       return;
     }
 
@@ -245,21 +278,38 @@ const ContactFormWithPhone = () => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       // Success
-      toast({
-        title: "Message sent successfully!",
+      toast.success("Message sent successfully!", {
         description: "We will get back to you shortly.",
       });
+
+      // Announce success to screen readers
+      if (errorMessageRef.current) {
+        errorMessageRef.current.textContent =
+          "Your message was sent successfully. We will get back to you as soon as possible.";
+        setTimeout(() => {
+          if (errorMessageRef.current) errorMessageRef.current.textContent = "";
+        }, 5000);
+      }
 
       // Reset form
       setFormData({ name: "", email: "", phone: "", message: "" });
       setTouched({ name: false, email: false, phone: false, message: false });
       setErrors({});
+      // Refocus name input after reset
+      if (nameRef.current) nameRef.current.focus();
     } catch (error) {
-      toast({
-        title: "Failed to send message",
+      toast.error("Failed to send message", {
         description: "Please try again later.",
-        variant: "destructive",
       });
+
+      // Announce error to screen readers
+      if (errorMessageRef.current) {
+        errorMessageRef.current.textContent =
+          "Failed to send message. Please try again later.";
+        setTimeout(() => {
+          if (errorMessageRef.current) errorMessageRef.current.textContent = "";
+        }, 5000);
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -272,12 +322,21 @@ const ContactFormWithPhone = () => {
       noValidate
       aria-label="Contact form"
     >
+      {/* Screen reader only message */}
+      <div
+        className="sr-only"
+        aria-live="assertive"
+        aria-atomic="true"
+        ref={errorMessageRef}
+      ></div>
+
       <div>
         <label htmlFor="name" className="block text-sm font-medium mb-1">
           Name{" "}
           <span className="text-red-500" aria-hidden="true">
             *
           </span>
+          <span className="sr-only">(required)</span>
         </label>
         <input
           id="name"
@@ -287,6 +346,8 @@ const ContactFormWithPhone = () => {
           value={formData.name}
           onChange={handleChange}
           onBlur={handleBlur}
+          ref={nameRef}
+          autoComplete="name"
           className={`w-full p-3 bg-akcess-black border ${
             errors.name && touched.name ? "border-red-500" : "border-gray-700"
           } rounded text-white`}
@@ -295,7 +356,6 @@ const ContactFormWithPhone = () => {
             errors.name && touched.name ? "name-error" : undefined
           }
           aria-required="true"
-          autoComplete="name"
           aria-invalid={!!errors.name && touched.name}
         />
         {errors.name && touched.name && (
@@ -311,6 +371,7 @@ const ContactFormWithPhone = () => {
           <span className="text-red-500" aria-hidden="true">
             *
           </span>
+          <span className="sr-only">(required)</span>
         </label>
         <input
           id="email"
@@ -320,6 +381,8 @@ const ContactFormWithPhone = () => {
           value={formData.email}
           onChange={handleChange}
           onBlur={handleBlur}
+          ref={emailRef}
+          autoComplete="email"
           className={`w-full p-3 bg-akcess-black border ${
             errors.email && touched.email ? "border-red-500" : "border-gray-700"
           } rounded text-white`}
@@ -346,6 +409,7 @@ const ContactFormWithPhone = () => {
           <span className="text-red-500" aria-hidden="true">
             *
           </span>
+          <span className="sr-only">(required)</span>
         </label>
         <input
           id="phone"
@@ -355,6 +419,8 @@ const ContactFormWithPhone = () => {
           value={formData.phone}
           onChange={handleChange}
           onBlur={handleBlur}
+          ref={phoneRef}
+          autoComplete="tel"
           className={`w-full p-3 bg-akcess-black border ${
             errors.phone && touched.phone ? "border-red-500" : "border-gray-700"
           } rounded text-white`}
@@ -381,6 +447,7 @@ const ContactFormWithPhone = () => {
           <span className="text-red-500" aria-hidden="true">
             *
           </span>
+          <span className="sr-only">(required)</span>
         </label>
         <textarea
           id="message"
@@ -389,6 +456,8 @@ const ContactFormWithPhone = () => {
           value={formData.message}
           onChange={handleChange}
           onBlur={handleBlur}
+          ref={messageRef}
+          autoComplete="on"
           rows={4}
           className={`w-full p-3 bg-akcess-black border ${
             errors.message && touched.message
