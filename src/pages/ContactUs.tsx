@@ -126,12 +126,7 @@ const ContactFormWithPhone = () => {
     phone: "",
     message: "",
   });
-  const [errors, setErrors] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
+  const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [touched, setTouched] = useState({
     name: false,
@@ -162,34 +157,32 @@ const ContactFormWithPhone = () => {
     }
   };
 
-  const validateField = (fieldName, fieldValue) => {
-    const newErrors = { name: "", email: "", phone: "", message: "" };
+  const validateField = (name, value) => {
+    const newErrors = {};
 
-    if (fieldName === "name" && !fieldValue.trim()) {
+    if (name === "name" && !value.trim()) {
       newErrors.name = "Name is required";
     }
 
-    if (fieldName === "email") {
-      if (!fieldValue.trim()) {
+    if (name === "email") {
+      if (!value.trim()) {
         newErrors.email = "Email is required";
-      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fieldValue)) {
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
         newErrors.email = "Please enter a valid email";
       }
     }
 
-    if (fieldName === "phone") {
-      if (!fieldValue.trim()) {
+    if (name === "phone") {
+      if (!value.trim()) {
         newErrors.phone = "Phone is required";
       } else if (
-        !/^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/.test(
-          fieldValue
-        )
+        !/^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/.test(value)
       ) {
         newErrors.phone = "Please enter a valid phone number";
       }
     }
 
-    if (fieldName === "message" && !fieldValue.trim()) {
+    if (name === "message" && !value.trim()) {
       newErrors.message = "Message is required";
     }
 
@@ -211,7 +204,7 @@ const ContactFormWithPhone = () => {
   };
 
   const validateForm = () => {
-    const newErrors = { name: "", email: "", phone: "", message: "" };
+    const newErrors = {};
 
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
@@ -313,12 +306,7 @@ const ContactFormWithPhone = () => {
       // Reset form
       setFormData({ name: "", email: "", phone: "", message: "" });
       setTouched({ name: false, email: false, phone: false, message: false });
-      setErrors({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-      });
+      setErrors({});
       // Refocus name input after reset
       if (nameRef.current) nameRef.current.focus();
     } catch (error) {
