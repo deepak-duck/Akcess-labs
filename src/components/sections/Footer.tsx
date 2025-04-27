@@ -20,7 +20,7 @@ const Footer = () => {
             <ul className="flex space-x-4">
               <li>
                 <a
-                  href="#"
+                  href="/progress"
                   className="text-gray-400 hover:text-akcess-lime transition-colors"
                   aria-label="X"
                 >
@@ -40,7 +40,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/progress"
                   className="text-gray-400 hover:text-akcess-lime transition-colors"
                   aria-label="Facebook"
                 >
@@ -49,7 +49,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/progress"
                   className="text-gray-400 hover:text-akcess-lime transition-colors"
                   aria-label="Instagram"
                 >
@@ -58,7 +58,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/progress"
                   className="text-gray-400 hover:text-akcess-lime transition-colors"
                   aria-label="LinkedIn"
                 >
@@ -67,7 +67,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/progress"
                   className="text-gray-400 hover:text-akcess-lime transition-colors"
                   aria-label="GitHub"
                 >
@@ -76,7 +76,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/progress"
                   className="text-gray-400 hover:text-akcess-lime transition-colors"
                   aria-label="YouTube"
                 >
@@ -143,7 +143,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/progress"
                   className="text-gray-400 hover:text-akcess-lime transition-colors"
                 >
                   Careers
@@ -151,7 +151,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/progress"
                   className="text-gray-400 hover:text-akcess-lime transition-colors"
                 >
                   Partners
@@ -159,7 +159,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/progress"
                   className="text-gray-400 hover:text-akcess-lime transition-colors"
                 >
                   Blog
@@ -180,7 +180,7 @@ const Footer = () => {
             <ul className="space-y-4">
               <li>
                 <a
-                  href="#"
+                  href="/progress"
                   className="text-gray-400 hover:text-akcess-lime transition-colors"
                 >
                   Accessibility Guide
@@ -188,7 +188,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/progress"
                   className="text-gray-400 hover:text-akcess-lime transition-colors"
                 >
                   WCAG Checklist
@@ -196,7 +196,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/progress"
                   className="text-gray-400 hover:text-akcess-lime transition-colors"
                 >
                   Help Center
@@ -212,7 +212,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/progress"
                   className="text-gray-400 hover:text-akcess-lime transition-colors"
                 >
                   Webinars
@@ -229,25 +229,31 @@ const Footer = () => {
             <ul className="flex flex-wrap gap-6">
               <li>
                 <a
-                  href="#"
+                  href="/progress"
                   className="text-gray-400 hover:text-akcess-lime transition-colors"
                 >
                   Terms of Service
                 </a>
+              </li>
+              <li>
                 <a
-                  href="#"
+                  href="/progress"
                   className="text-gray-400 hover:text-akcess-lime transition-colors"
                 >
                   Privacy Policy
                 </a>
+              </li>
+              <li>
                 <a
-                  href="#"
+                  href="/progress"
                   className="text-gray-400 hover:text-akcess-lime transition-colors"
                 >
                   Cookie Policy
                 </a>
+              </li>
+              <li>
                 <a
-                  href="#"
+                  href="/progress"
                   className="text-gray-400 hover:text-akcess-lime transition-colors"
                 >
                   Sitemap
