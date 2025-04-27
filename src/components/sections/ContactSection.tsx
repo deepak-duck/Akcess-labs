@@ -29,7 +29,7 @@ export const ContactSection = (): JSX.Element => {
             </div>
             <Button
               onClick={handleContactUs}
-              className="w-fit mt-2 text-akcess-lime hover:text-akcess-lime focus:border-2 border-green-500"
+              className="w-fit mt-2 text-akcess-lime hover:text-akcess-lime outline-red-400"
             >
               Contact Us
             </Button>

@@ -12,9 +12,9 @@ const HeroSection = () => {
 
   useEffect(() => {
     const skipLink = document.querySelector(".skiptomain");
-    const demoButton = document.querySelector("#demobutton");
+    const demoButton: HTMLElement = document.querySelector("#demobutton");
 
-    const handleSkip = (e) => {
+    const handleSkip = (e: Event) => {
       e.preventDefault();
       demoButton.focus();
     };

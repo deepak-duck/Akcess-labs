@@ -3,6 +3,7 @@ import { Phone, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
+import emailjs from "@emailjs/browser";
 
 const ContactUs = () => {
   return (
@@ -125,7 +126,12 @@ const ContactFormWithPhone = () => {
     phone: "",
     message: "",
   });
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [touched, setTouched] = useState({
     name: false,
@@ -156,32 +162,34 @@ const ContactFormWithPhone = () => {
     }
   };
 
-  const validateField = (name, value) => {
-    const newErrors = {};
+  const validateField = (fieldName, fieldValue) => {
+    const newErrors = { name: "", email: "", phone: "", message: "" };
 
-    if (name === "name" && !value.trim()) {
+    if (fieldName === "name" && !fieldValue.trim()) {
       newErrors.name = "Name is required";
     }
 
-    if (name === "email") {
-      if (!value.trim()) {
+    if (fieldName === "email") {
+      if (!fieldValue.trim()) {
         newErrors.email = "Email is required";
-      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fieldValue)) {
         newErrors.email = "Please enter a valid email";
       }
     }
 
-    if (name === "phone") {
-      if (!value.trim()) {
+    if (fieldName === "phone") {
+      if (!fieldValue.trim()) {
         newErrors.phone = "Phone is required";
       } else if (
-        !/^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/.test(value)
+        !/^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/.test(
+          fieldValue
+        )
       ) {
         newErrors.phone = "Please enter a valid phone number";
       }
     }
 
-    if (name === "message" && !value.trim()) {
+    if (fieldName === "message" && !fieldValue.trim()) {
       newErrors.message = "Message is required";
     }
 
@@ -203,7 +211,7 @@ const ContactFormWithPhone = () => {
   };
 
   const validateForm = () => {
-    const newErrors = {};
+    const newErrors = { name: "", email: "", phone: "", message: "" };
 
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
@@ -272,10 +280,21 @@ const ContactFormWithPhone = () => {
     }
 
     setIsSubmitting(true);
+    const prams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      phone: formData.phone,
+      message: formData.message,
+    };
 
     try {
       // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        prams,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
 
       // Success
       toast.success("Message sent successfully!", {
@@ -294,7 +313,12 @@ const ContactFormWithPhone = () => {
       // Reset form
       setFormData({ name: "", email: "", phone: "", message: "" });
       setTouched({ name: false, email: false, phone: false, message: false });
-      setErrors({});
+      setErrors({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
       // Refocus name input after reset
       if (nameRef.current) nameRef.current.focus();
     } catch (error) {
@@ -398,7 +422,7 @@ const ContactFormWithPhone = () => {
             className="mt-1 text-sm text-red-500"
             role="alert"
           >
-            {errors.email}
+            Error: {errors.email}
           </p>
         )}
       </div>
@@ -436,7 +460,7 @@ const ContactFormWithPhone = () => {
             className="mt-1 text-sm text-red-500"
             role="alert"
           >
-            {errors.phone}
+            Error: {errors.phone}
           </p>
         )}
       </div>
@@ -476,7 +500,7 @@ const ContactFormWithPhone = () => {
             className="mt-1 text-sm text-red-500"
             role="alert"
           >
-            {errors.message}
+            Error: {errors.message}
           </p>
         )}
       </div>
