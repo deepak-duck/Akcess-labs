@@ -8,14 +8,15 @@ import FAQSection from "@/components/sections/FAQSection";
 import ContactSection from "@/components/sections/ContactSection";
 import Footer from "@/components/sections/Footer";
 
+
+
 const Index = () => {
   return (
     <div className="bg-akcess-black text-white min-h-screen">
       <Navbar />
-      <main>
+      <main id="main-content">
         <HeroSection />
         <ServicesSection />
-        {/* <AboutSection /> */}
         <About />
         <FAQSection />
         <ContactSection />

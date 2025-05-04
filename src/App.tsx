@@ -1,31 +1,26 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import ContactUs from "./pages/ContactUs";
 import NotFound from "./pages/NotFound";
-import ProgressPage from "./pages/ProgressPage";
+import UnderDevelopment from "./pages/ProgressPage";
 
-const queryClient = new QueryClient();
+
 
 const App = () => {
   return (
     <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <Toaster />
-          <Sonner />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/contact-us" element={<ContactUs />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="/progress" element={<UnderDevelopment />} />
             <Route path="*" element={<NotFound />} />
-            <Route path="/progress" element={<ProgressPage />} />
           </Routes>
         </TooltipProvider>
-      </QueryClientProvider>
     </BrowserRouter>
   );
 };

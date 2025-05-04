@@ -9,14 +9,14 @@ const Navbar = () => {
   const menuRef = useRef(null); // Ref for the mobile menu container
   const toggleButtonRef = useRef(null); // Ref for the hamburger/X button
 
-  // Close mobile menu when route changes
+  // Close mobile menu and set active hash when route or hash changes
   useEffect(() => {
     setIsMenuOpen(false);
     const hash = location.hash.replace("#", "");
     setActiveHash(hash || (location.pathname === "/" ? "home" : ""));
   }, [location]);
 
-  // Focus trapping effect
+  // Focus trapping for mobile menu
   useEffect(() => {
     if (!isMenuOpen) return;
 
@@ -57,11 +57,101 @@ const Navbar = () => {
     };
   }, [isMenuOpen]);
 
+  // Skip to main link handler
+  useEffect(() => {
+    const skipLink = document.querySelector(".skiptomain");
+
+    const handleSkip = (e) => {
+      e.preventDefault();
+
+      // Determine focus target based on the current route
+      if (location.pathname === "/") {
+        // Homepage: Focus the "Request a Demo" button
+        const demoButton = document.querySelector("#demobutton");
+        if (demoButton) {
+          demoButton.focus();
+          return;
+        }
+      } else if (location.pathname === "/contact-us") {
+        // Contact Us page: Focus the name input field
+        const nameInput = document.querySelector("#name");
+        if (nameInput) {
+          nameInput.focus();
+          return;
+        }
+      }
+
+      // Fallback: Focus main content or its first focusable child
+      const mainContent =
+        document.querySelector("#main-content") ||
+        document.querySelector("main") ||
+        document.querySelector('[role="main"]');
+
+      if (mainContent) {
+        const firstFocusable = mainContent.querySelector(
+          'h1, [tabindex="0"], a[href], button, input, textarea'
+        ) || mainContent;
+        firstFocusable.setAttribute("tabindex", "-1"); // Ensure focusable
+        firstFocusable.focus();
+      }
+    };
+
+    if (skipLink) {
+      skipLink.addEventListener("click", handleSkip);
+      return () => skipLink.removeEventListener("click", handleSkip);
+    }
+  }, [location.pathname]);
+
+  // Scroll-based nav highlighting for homepage
+  useEffect(() => {
+    if (location.pathname !== "/") return; // Only run on homepage
+
+    const sections = ["home", "services", "about", "faq"];
+    let timeoutId;
+
+    const handleScroll = () => {
+      clearTimeout(timeoutId);
+
+      timeoutId = setTimeout(() => {
+        let closestSection = "";
+        let minDistance = Infinity;
+
+        // Find the section closest to the viewport top
+        for (const section of sections) {
+          const element = document.getElementById(section);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            const distance = Math.abs(rect.top);
+            if (distance < minDistance && rect.top <= window.innerHeight * 0.5) {
+              minDistance = distance;
+              closestSection = section;
+            }
+          }
+        }
+
+        // Update activeHash if a section is found
+        if (closestSection && closestSection !== activeHash) {
+          setActiveHash(closestSection);
+          window.history.replaceState(null, "", `/#${closestSection}`);
+        } else if (!closestSection && window.scrollY < 50 && activeHash !== "home") {
+          // Only set to "home" if near the top of the page
+          setActiveHash("home");
+          window.history.replaceState(null, "", "/#home");
+        }
+      }, 50); // Reduced debounce for faster response
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timeoutId);
+    };
+  }, [location.pathname, activeHash]);
+
   const toggleMenu = () => {
     const newState = !isMenuOpen;
     setIsMenuOpen(newState);
     if (!newState && toggleButtonRef.current) {
-      // Return focus to toggle button when closing
       toggleButtonRef.current.focus();
     }
   };
@@ -85,7 +175,7 @@ const Navbar = () => {
   // Handle hash navigation
   const handleNavClick = (e, hash) => {
     if (!hash || location.pathname !== "/") {
-      setIsMenuOpen(false); // Close menu on normal navigation
+      setIsMenuOpen(false);
       return;
     }
     e.preventDefault();
@@ -124,7 +214,7 @@ const Navbar = () => {
       className="bg-black py-4 px-6 md:px-12 lg:px-28 sticky top-0 z-50"
       aria-label="Main navigation"
     >
-      <a href="#home" className="skiptomain">
+      <a href="#main-content" className="skiptomain">
         Skip to main
       </a>
       <div className="flex justify-between items-center">
@@ -203,7 +293,11 @@ const Navbar = () => {
                 <Link
                   key={index}
                   to={item.path}
-                  className="bg-akcess-lime text-akcess-black px-4 py-2 rounded font-semibold hover:bg-opacity-90 transition-all duration-300 text-center"
+                  className={`px-4 py-2 rounded font-semibold text-center transition-all duration-300 ${
+                    isActive(item.hash, item.path)
+                      ? "bg-akcess-lime text-akcess-black"
+                      : "bg-akcess-lime text-akcess-black hover:bg-opacity-90"
+                  }`}
                   tabIndex={isMenuOpen ? undefined : -1}
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -213,11 +307,16 @@ const Navbar = () => {
                 <a
                   key={index}
                   href={item.path}
-                  className="text-white hover:text-akcess-lime transition-colors py-2"
+                  className={`text-white hover:text-akcess-lime transition-colors py-2 ${
+                    isActive(item.hash, item.path) ? "font-medium text-akcess-lime" : ""
+                  }`}
                   onClick={(e) => handleNavClick(e, item.hash || null)}
                   tabIndex={isMenuOpen ? undefined : -1}
                 >
                   {item.label}
+                  {isActive(item.hash, item.path) && (
+                    <span className="block w-full h-0.5 bg-akcess-lime rounded-full mt-1"></span>
+                  )}
                 </a>
               )
             )}

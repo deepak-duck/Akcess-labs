@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -78,10 +77,15 @@
 
   body {
     @apply bg-background text-foreground font-sans;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: "Plus Jakarta Sans", sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-sans font-bold;
   }
 
@@ -130,7 +134,7 @@
 .hover-scale:hover {
   transform: scale(1.03);
 }
-.skip-to-content{
+.skip-to-content {
   /* display: ; */
   position: absolute;
   left: 5px;
@@ -141,7 +145,7 @@
   width: 5rem;
   color: white;
 }
-.skip-to-content:focus{
+.skip-to-content:focus {
   display: block;
   position: absolute;
   left: 5px;
@@ -153,16 +157,7 @@
   color: white;
 }
 
-/* .hehe:focus{
-  border: 1px solid white;
-} */
-/* *:focus {
-  border: 1px solid white;
-} */
-
-/* h-12 w-20 absolute left-0 top-0 -translate-y-full opacity-0 focus:translate-y-0 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-blue-500 focus:text-white px-4 py-2 transition-all duration-200 */
-
-.skiptomain{
+.skiptomain {
   position: absolute;
   left: -999px;
   top: 3rem;
@@ -171,7 +166,7 @@
   width: fit-content;
 }
 
-.skiptomain:focus{
-  left: .25rem;
+.skiptomain:focus {
+  left: 0.25rem;
   opacity: 100;
 }
